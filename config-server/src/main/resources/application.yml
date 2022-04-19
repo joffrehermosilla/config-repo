@@ -11,8 +11,7 @@ spring:
   cloud:
     config:
       server:
-        bootstrap: false
-        git:
+         git:
           clone-on-start: true
           default-label: master
           uri: https://github.com/joffrehermosilla/config-repo.git
