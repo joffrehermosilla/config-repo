@@ -12,9 +12,8 @@ spring:
     config:
       server:
          git:
-          clone-on-start: true
           default-label: master
-          uri: https://github.com/joffrehermosilla/config-repo.git
+          uri: https://github.com/joffrehermosilla/config-repo
           search-paths: config-data
       
           
