@@ -101,7 +101,11 @@ spring:
         id: microservicio-usar-cuenta
         uri: lb://microservicio-usar-cuenta
         predicates: Path=/api/usar/cuenta/**
-
+      routes[20]:
+        filters: StripPrefix=3
+        id: microservicio-tarjeta-debito
+        uri: lb://microservicio-tarjeta-debito
+        predicates: Path=/api/tarjeta/debito/**
 
       discovery:
         locator:
