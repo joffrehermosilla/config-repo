@@ -12,3 +12,40 @@ spring:
   data:
     mongodb:
       uri: mongodb+srv://joffre:joffre@bootcamp-microservicios.c9yhl.mongodb.net/cliente-juridico?retryWrites=true&w=majority
+
+resilience4j.circuitbreaker:
+    instances:
+        RepreBusinessCB:
+            registerHealthIndicator: true
+            slidingWindowSize: 10
+            permittedNumberOfCallsInHalfOpenState: 3
+            slidingWindowType: TIME_BASED
+            minimumNumberOfCalls: 20
+            waitDurationInOpenState: 8s
+            failureRateThreshold: 50
+            eventConsumerBufferSize: 10
+        backendB:
+            registerHealthIndicator: true
+            slidingWindowSize: 10
+            permittedNumberOfCallsInHalfOpenState: 3
+            slidingWindowType: TIME_BASED
+            minimumNumberOfCalls: 20
+            waitDurationInOpenState: 8s
+            failureRateThreshold: 50
+            eventConsumerBufferSize: 10
+
+resilience4j.timelimiter:
+    instances:
+        RepreBusinessCB:
+            timeoutDuration: 2s
+            cancelRunningFuture: true
+        backendB:
+            timeoutDuration: 1s
+            cancelRunningFuture: false
+
+
+
+webclient:
+ representante:
+  conexion: localhost:8090/api/representante/empresarial/
+            

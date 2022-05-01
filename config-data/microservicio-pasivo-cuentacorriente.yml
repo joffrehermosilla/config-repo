@@ -12,3 +12,35 @@ spring:
   data:
     mongodb:
       uri: mongodb+srv://joffre:joffre@bootcamp-microservicios.c9yhl.mongodb.net/pasivo-cuentacorriente?retryWrites=true&w=majority
+
+
+resilience4j.circuitbreaker:
+    instances:
+        backendA:
+            registerHealthIndicator: true
+            slidingWindowSize: 10
+            permittedNumberOfCallsInHalfOpenState: 3
+            slidingWindowType: TIME_BASED
+            minimumNumberOfCalls: 20
+            waitDurationInOpenState: 2s
+            failureRateThreshold: 50
+            eventConsumerBufferSize: 10
+        backendB:
+            registerHealthIndicator: true
+            slidingWindowSize: 10
+            permittedNumberOfCallsInHalfOpenState: 3
+            slidingWindowType: TIME_BASED
+            minimumNumberOfCalls: 20
+            waitDurationInOpenState: 2s
+            failureRateThreshold: 50
+            eventConsumerBufferSize: 10
+
+resilience4j.timelimiter:
+    instances:
+        backendA:
+            timeoutDuration: 2s
+            cancelRunningFuture: true
+        backendB:
+            timeoutDuration: 1s
+            cancelRunningFuture: false
+            
